@@ -5,7 +5,7 @@ from config import OPENAI_API_KEY
 def read_article(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         return file.read()
-    
+
 def process_with_openai(article_text):
     openai.api_key = OPENAI_API_KEY
     prompt = (
@@ -31,11 +31,11 @@ def process_with_openai(article_text):
         temperature=0.7,
     )
 
-    return response.choices[0].message['content']  
+    return response.choices[0].message['content']
 
 def save_html(html_content, output_path):
     with open(output_path, 'w', encoding='utf-8') as file:
-        file.write(html_content)  
+        file.write(html_content)
 
 def main():
     input_file = 'artykul.txt'
