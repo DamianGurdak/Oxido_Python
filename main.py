@@ -37,14 +37,34 @@ def save_html(html_content, output_path):
     with open(output_path, 'w', encoding='utf-8') as file:
         file.write(html_content)
 
+def create_preview(template_path, article_html, output_path):
+    with open(template_path, 'r', encoding='utf-8') as template_file:
+        template_content = template_file.read()
+
+    insertion_point = '<!-- Sekcja na artykuł -->'
+
+    if insertion_point in template_content:
+        preview_content = template_content.replace(insertion_point, article_html)
+    else:
+        preview_content = template_content + article_html  # Jeśli punkt wstawienia nie istnieje
+
+    with open(output_path, 'w', encoding='utf-8') as preview_file:
+        preview_file.write(preview_content)        
+
 def main():
     input_file = 'artykul.txt'
     output_file = 'artykul.html'
+    template_file = 'szablon.html'
+    preview_file = 'podglad.html'
 
     article_text = read_article(input_file)
     html_content = process_with_openai(article_text)
     save_html(html_content, output_file)
     print(f"Plik HTML został zapisany jako {output_file}")
+
+  
+    create_preview(template_file, html_content, preview_file)
+    print(f"Plik podglądowy został zapisany jako {preview_file}")
 
 if __name__ == "__main__":
     main()
