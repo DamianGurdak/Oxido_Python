@@ -36,3 +36,15 @@ def process_with_openai(article_text):
 def save_html(html_content, output_path):
     with open(output_path, 'w', encoding='utf-8') as file:
         file.write(html_content)  
+
+def main():
+    input_file = 'artykul.txt'
+    output_file = 'artykul.html'
+
+    article_text = read_article(input_file)
+    html_content = process_with_openai(article_text)
+    save_html(html_content, output_file)
+    print(f"Plik HTML został zapisany jako {output_file}")
+
+if __name__ == "__main__":
+    main()
