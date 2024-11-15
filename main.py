@@ -31,4 +31,8 @@ def process_with_openai(article_text):
         temperature=0.7,
     )
 
-    return response.choices[0].message['content']    
+    return response.choices[0].message['content']  
+
+def save_html(html_content, output_path):
+    with open(output_path, 'w', encoding='utf-8') as file:
+        file.write(html_content)  
